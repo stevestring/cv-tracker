@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TimeSeries, Index } from "pondjs";
 
 import {
@@ -7,61 +7,45 @@ import {
     ChartRow,
     YAxis,
     LineChart,
-    BarChart,
     styler 
 } from "react-timeseries-charts";
 
-import data1 from './download.json';
+import data1 from './download1.json';
 
-const data = [
-    ["2017-01-24T00:00", 0.01],
-    ["2017-01-24T01:00", 0.13],
-    ["2017-01-24T02:00", 0.07],
-    ["2017-01-24T03:00", 0.04],
-    ["2017-01-24T04:00", 0.33],
-    ["2017-01-24T05:00", 0],
-    ["2017-01-24T06:00", 0],
-    ["2017-01-24T07:00", 0],
-    ["2017-01-24T08:00", 0.95],
-    ["2017-01-24T09:00", 1.12],
-    ["2017-01-24T10:00", 0.66],
-    ["2017-01-24T11:00", 0.06],
-    ["2017-01-24T12:00", 0.3],
-    ["2017-01-24T13:00", 0.05],
-    ["2017-01-24T14:00", 0.5],
-    ["2017-01-24T15:00", 0.24],
-    ["2017-01-24T16:00", 0.02],
-    ["2017-01-24T17:00", 0.98],
-    ["2017-01-24T18:00", 0.46],
-    ["2017-01-24T19:00", 0.8],
-    ["2017-01-24T20:00", 0.39],
-    ["2017-01-24T21:00", 0.4],
-    ["2017-01-24T22:00", 0.39],
-    ["2017-01-24T23:00", 0.28]
-];
+function getTimeSeriesforState(state){      
+      
+    for (var obj in data1) {                
+            //console.log(key + " -> " + data1[0].TimeSeries[key]);
+            //console.log(obj);
+            if (data1[obj]["Province/State"] === state)
+            {
+                //alert(state);
+                return data1[obj].TimeSeries;     
+            }
+    }
+    
+}; 
 
 function transFormJSON(){      
     var ar = new Array();    
-    for (var key in data1[0].TimeSeries) {                
+    var jsonTs =  getTimeSeriesforState("Maryland")
+    for (var key in jsonTs) {               
             //console.log(key + " -> " + data1[0].TimeSeries[key]);
-            ar.push([key,data1[0].TimeSeries[key]]);
-                   
+            ar.push([key,jsonTs[key]]);      
     }
-
     console.log (ar);
     return ar 
 };  
 
 const series = new TimeSeries({
     name: "cv_cases",
-    columns: ["index", "precip"],
+    columns: ["index", "cases"],
     points: transFormJSON().map(([d, value]) => [Index.getIndexString("1h", new Date(d)), value])
 });
 
 class TimeSeriesChart extends React.Component {
     constructor(props) {
-        super(props);
-    
+        super(props);    
         this.state = {
           loaded: false,
           timeSeries: null
@@ -77,17 +61,17 @@ class TimeSeriesChart extends React.Component {
     
     
     render() {
-      const style = styler([{ key: "precip", color: "red", selected: "#2CB1CF" }]);
+      const style = styler([{ key: "cases", color: "red", selected: "#2CB1CF" }]);
       return (
         
   <ChartContainer timeRange={series.range()}>
-                                <ChartRow height="250" title="Open Cases">
+                                <ChartRow height="250" title="Maryland">
                                     <YAxis
                                         id="cases"
-                                        label="Maryland"
+                                        // label="Open Cases"
                                         min={0}
                                         max={100}
-                                        format=".2f"
+                                        //format=".2f"
                                         width="70"
                                         type="linear"
                                     />
@@ -96,7 +80,7 @@ class TimeSeriesChart extends React.Component {
                                             axis="cases"
                                             style={style}
                                             spacing={1}
-                                            columns={["precip"]}
+                                            columns={["cases"]}
                                             series={series}
                                             minBarHeight={1}
                                         />
@@ -106,7 +90,6 @@ class TimeSeriesChart extends React.Component {
         
       )}
     
-
 }
 
 export default TimeSeriesChart;
