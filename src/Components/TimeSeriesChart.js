@@ -7,7 +7,8 @@ import {
     ChartRow,
     YAxis,
     LineChart,
-    styler 
+    styler,
+    Resizable 
 } from "react-timeseries-charts";
 
 import data1 from './download1.json';
@@ -26,22 +27,24 @@ function getTimeSeriesforState(state){
     
 }; 
 
-function transFormJSON(){      
+function transFormJSON(region){      
     var ar = new Array();    
-    var jsonTs =  getTimeSeriesforState("Maryland")
+    
+    region = region.replace(/-/g, " ");
+    //region = region.replace(" MD",", MD");
+    //alert(region);
+    var jsonTs =  getTimeSeriesforState(region)
     for (var key in jsonTs) {               
             //console.log(key + " -> " + data1[0].TimeSeries[key]);
-            ar.push([key,jsonTs[key]]);      
+            if (key>'3/1/2020')
+        {
+            ar.push([key,jsonTs[key]]);  
+        }    
     }
     console.log (ar);
     return ar 
 };  
 
-const series = new TimeSeries({
-    name: "cv_cases",
-    columns: ["index", "cases"],
-    points: transFormJSON().map(([d, value]) => [Index.getIndexString("1h", new Date(d)), value])
-});
 
 class TimeSeriesChart extends React.Component {
     constructor(props) {
@@ -52,27 +55,36 @@ class TimeSeriesChart extends React.Component {
         };
       }
 
-    componentDidMount() {        
+    // componentDidMount() {        
+
+    //     createTimeseries().then(response => {
+    //         this.setState({
+    //           timeSeries: response
+    //         });
     
-        this.setState({
-            timeSeries: series   
+    //     });
+    // }
+
+    createTimeseries(region)
+    { return new TimeSeries({
+            name: "cv_cases",
+            columns: ["index", "cases"],
+            points: transFormJSON(region).map(([d, value]) => [Index.getIndexString("1h", new Date(d)), parseInt( value)])
         });
     }
     
-    
     render() {
-      const style = styler([{ key: "cases", color: "red", selected: "#2CB1CF" }]);
+      const timeSeries = this.createTimeseries(this.props.region);
+      const style = styler([{ key: "cases", color: "red",width: 3, selected: "#2CB1CF" }]);
+      //alert (timeSeries.min("cases") +":"+ timeSeries.max("cases"));
       return (
-        
-  <ChartContainer timeRange={series.range()}>
-                                <ChartRow height="250" title="Maryland">
+        <Resizable>
+  <ChartContainer timeRange={timeSeries.range()}>
+                                <ChartRow height="300">
                                     <YAxis
                                         id="cases"
-                                        // label="Open Cases"
                                         min={0}
-                                        max={100}
-                                        //format=".2f"
-                                        width="70"
+                                        max={timeSeries.max("cases")}
                                         type="linear"
                                     />
                                     <Charts>
@@ -81,13 +93,19 @@ class TimeSeriesChart extends React.Component {
                                             style={style}
                                             spacing={1}
                                             columns={["cases"]}
-                                            series={series}
+                                            series={timeSeries}
                                             minBarHeight={1}
                                         />
                                     </Charts>
+                                    <YAxis
+                                        id="cases"
+                                        min={0}
+                                        max={timeSeries.max("cases")}
+                                        type="linear"
+                                    />
                                 </ChartRow>
                             </ChartContainer> 
-        
+                            </Resizable>
       )}
     
 }

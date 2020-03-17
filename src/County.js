@@ -11,17 +11,19 @@ import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import AppNavbar from './Components/AppNavbar';
 
-import './App.css';
+class County extends React.Component {
+  
+    render() {  
+    
+    return (<Container className="p-3">
+        <AppNavbar/>
+        <Jumbotron>
+        <h1 className="header">United States Coronavirus Tracker</h1>     
+        </Jumbotron>
+        <TimeSeriesChart region={this.props.region}/>
+    </Container>
+     );
+    }
+}
 
-
-const App = () => (  
-  <Container className="p-3">
-  <AppNavbar/>
-    <Jumbotron>
-      <h1 className="header">United States Coronavirus Tracker</h1>     
-    </Jumbotron>
-    <TimeSeriesChart region = "Maryland"/>
-  </Container>
-);
-
-export default App;
+export default County;
