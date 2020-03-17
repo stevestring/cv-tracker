@@ -1,14 +1,9 @@
 import React from 'react';
 
-import Jumbotron from 'react-bootstrap/Jumbotron';
+
 import Container from 'react-bootstrap/Container';
 import TimeSeriesChart from './Components/TimeSeriesChart';
-import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
-import Button from 'react-bootstrap/Button';
 import AppNavbar from './Components/AppNavbar';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -18,7 +13,7 @@ class State extends React.Component {
     
     return (<Container className="p-3">
     
-        <AppNavbar/><br/><h1 className="header">{this.props.region} coronavirus cases</h1>
+        <AppNavbar/><br/><h1 className="header">{this.props.region}</h1>
         <br/>
         <Row>
         <Col xs={2}><Nav defaultActiveKey="/home" className="flex-column">
@@ -30,11 +25,14 @@ class State extends React.Component {
             <Nav.Link href="/state/New-Jersey">New Jersey</Nav.Link>
             <Nav.Link href="/state/Colorado">Colorado</Nav.Link>
             <Nav.Link href="/state/Washington">Washington</Nav.Link>
-            <Nav.Link href="/state/Oregon">Oregon</Nav.Link>
-
+            <Nav.Link href="/state/Florida">Florida</Nav.Link>
+            <Nav.Link href="/state/Georgia">Georgia</Nav.Link>
+            <Nav.Link href="/state/North-Carolina">North Carolina</Nav.Link>
+            <Nav.Link href="/state/South-Carolina">South Carolina</Nav.Link>
             </Nav>
         </Col>
         <Col xs={10}>  
+        <br/>
         <TimeSeriesChart region={this.props.region}/>
         </Col>
         </Row>
