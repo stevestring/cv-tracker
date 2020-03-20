@@ -12,22 +12,22 @@ class State extends React.Component {
         super(props);    
         this.state = {
           loaded: false,
-          timeSeries: "a"
+          timeSeries: null
         };
     }
 
-    componentDidMount() {
-        //this.setState( {timeSeries: "data"});
-        alert(this.state.timeSeries);
-        fetch('https://3no0uoyhyh.execute-api.us-east-1.amazonaws.com/PROD/')
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          this.setState( {timeSeries: "data"});
-          //alert(this.state.timeSeries);
-        });
-    }
+    // componentDidMount() {
+    //     //this.setState( {timeSeries: "data"});
+    //     alert(this.state.timeSeries);
+    //     fetch('https://3no0uoyhyh.execute-api.us-east-1.amazonaws.com/PROD/')
+    //     .then((response) => {
+    //       return response.json();
+    //     })
+    //     .then((data) => {
+    //       this.setState( {timeSeries: data});
+    //       //alert(this.state.timeSeries);
+    //     });
+    // }
 
     render() {  
          
@@ -53,7 +53,7 @@ class State extends React.Component {
         </Col>
         <Col xs={10}>  
         <br/>
-        <TimeSeriesChart region={this.props.region} timeSeries={this.state.timeSeries}/>
+        <TimeSeriesChart region={this.props.region}/>
         </Col>
         </Row>
     </Container>
