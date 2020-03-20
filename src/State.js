@@ -12,25 +12,17 @@ class State extends React.Component {
         super(props);    
         this.state = {
           loaded: false,
+          region: 'Maryland',
           timeSeries: null
         };
     }
 
-    // componentDidMount() {
-    //     //this.setState( {timeSeries: "data"});
-    //     alert(this.state.timeSeries);
-    //     fetch('https://3no0uoyhyh.execute-api.us-east-1.amazonaws.com/PROD/')
-    //     .then((response) => {
-    //       return response.json();
-    //     })
-    //     .then((data) => {
-    //       this.setState( {timeSeries: data});
-    //       //alert(this.state.timeSeries);
-    //     });
-    // }
+    componentDidMount() {
+        //this.setState( {timeSeries: "data"});
+          this.setState( {region: this.props.region});
+    }
 
     render() {  
-         
     return (<Container className="p-3">
     
         <AppNavbar/><br/><h1 className="header">{this.props.region}</h1>
@@ -53,7 +45,7 @@ class State extends React.Component {
         </Col>
         <Col xs={10}>  
         <br/>
-        <TimeSeriesChart region={this.props.region}/>
+        <TimeSeriesChart region={this.state.region}/>
         </Col>
         </Row>
     </Container>
