@@ -28,16 +28,9 @@ class TimeSeriesChart extends React.Component {
 
     componentDidMount()
     {
-        //alert(this.state.timeSeries);
-        fetch('https://3no0uoyhyh.execute-api.us-east-1.amazonaws.com/PROD/')
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          this.setState( {timeSeries: data});
+          this.setState( {timeSeries: this.props.timeSeries});
           this.setState( {loaded: true});
           //alert(this.state.timeSeries);
-        });
     }
 
     createTimeseries(region)
@@ -95,7 +88,7 @@ class TimeSeriesChart extends React.Component {
       //alert (timeSeries.min("cases") +":"+ timeSeries.max("cases"));
       return (
         <Resizable>            
-  <ChartContainer timeRange={timeSeries.range()}>
+  <ChartContainer timeRange={timeSeries.range()} format="%m/%d">
                                 <ChartRow height="300">
                                     <YAxis
                                         id="cases"
