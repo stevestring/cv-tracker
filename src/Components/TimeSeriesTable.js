@@ -1,7 +1,7 @@
 import React from 'react';
 import { TimeSeries, Index } from "pondjs";
 import Table from 'react-bootstrap/Table';
-import data1 from './download1.json';
+import StateData from './StateData.json';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
@@ -28,6 +28,7 @@ class TimeSeriesTable extends React.Component {
 
     getTimeSeriesforState(state){   
       //alert(this.state.timeSeries);
+        state = state.replace(/-/g, " ");
         for (var obj in this.state.timeSeries) {                
                 //console.log(key + " -> " + data1[0].TimeSeries[key]);
                 //alert(JSON.stringify(this.state.timeSeries[obj]));
@@ -39,6 +40,18 @@ class TimeSeriesTable extends React.Component {
         }    
     }; 
  
+    getPopulationForState(state){   
+        state = state.replace(/ /g, "-");
+        for (var obj in StateData) {                
+                  //console.log(key + " -> " + data1[0].TimeSeries[key]);
+                  //alert(JSON.stringify(this.state.timeSeries[obj]));
+                  if (StateData[obj]["State"].toLowerCase() === state.toLowerCase())
+                  {                      
+                      return StateData[obj].Population;     
+                  }
+        }    
+      }; 
+
     transFormJSON(region){      
         var ar = new Array();            
         region = region.replace(/-/g, " ");
@@ -49,14 +62,18 @@ class TimeSeriesTable extends React.Component {
         var last = 0;
         var change=0;
         var pctChange=0;
+        var pctPopulation =0;
+        var population = this.getPopulationForState(region);
 
+        //alert (pctPopulation);
         for (var key in jsonTs) {    
             if (Date.parse(key)>Date.parse('3/08/2020'))
             {   
                 current = jsonTs[key]
                 change = current - last;
-                pctChange = Math.round(change/last*100);  
-                ar.push([key,current,change,pctChange]);  
+                pctChange = Math.round(change/last*100); 
+                pctPopulation = Math.round(current/population*100*10000)/10000;
+                ar.push([key,current,change,pctChange,pctPopulation]);  
                 last = current;     
             }    
         }
@@ -85,6 +102,7 @@ class TimeSeriesTable extends React.Component {
                 <tr>
                     <th>Date</th>
                     <th>Confirmed Cases</th>
+                    <th>% of Population ({this.getPopulationForState(this.props.region).toLocaleString('en')})</th>
                     <th>Change</th>
                     <th>% Change</th>
                 </tr>
@@ -95,8 +113,10 @@ class TimeSeriesTable extends React.Component {
                                 <tr key={i}>
                                     <td>{data[0]}</td>
                                     <td>{data[1]}</td>
+                                    <td>{data[4]}</td>
                                     <td>{data[2]}</td>
                                     <td>{data[3]}</td>
+                                    
                                 </tr>
                             )
                         })}

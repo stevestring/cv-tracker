@@ -1,0 +1,222 @@
+[
+    {
+      "State": "California",
+      "Population": 39512223
+    },
+    {
+      "State": "Texas",
+      "Population": 28995881
+    },
+    {
+      "State": "Florida",
+      "Population": 21477737
+    },
+    {
+      "State": "New-York",
+      "Population": 19453561
+    },
+    {
+      "State": "Pennsylvania",
+      "Population": 12801989
+    },
+    {
+      "State": "Illinois",
+      "Population": 12671821
+    },
+    {
+      "State": "Ohio",
+      "Population": 11689100
+    },
+    {
+      "State": "Georgia",
+      "Population": 10617423
+    },
+    {
+      "State": "North-Carolina",
+      "Population": 10488084
+    },
+    {
+      "State": "Michigan",
+      "Population": 9986857
+    },
+    {
+      "State": "New-Jersey",
+      "Population": 8882190
+    },
+    {
+      "State": "Virginia",
+      "Population": 8535519
+    },
+    {
+      "State": "Washington",
+      "Population": 7614893
+    },
+    {
+      "State": "Arizona",
+      "Population": 7278717
+    },
+    {
+      "State": "Massachusetts",
+      "Population": 6949503
+    },
+    {
+      "State": "Tennessee",
+      "Population": 6833174
+    },
+    {
+      "State": "Indiana",
+      "Population": 6732219
+    },
+    {
+      "State": "Missouri",
+      "Population": 6137428
+    },
+    {
+      "State": "Maryland",
+      "Population": 6045680
+    },
+    {
+      "State": "Wisconsin",
+      "Population": 5822434
+    },
+    {
+      "State": "Colorado",
+      "Population": 5758736
+    },
+    {
+      "State": "Minnesota",
+      "Population": 5639632
+    },
+    {
+      "State": "South-Carolina",
+      "Population": 5148714
+    },
+    {
+      "State": "Alabama",
+      "Population": 4903185
+    },
+    {
+      "State": "Louisiana",
+      "Population": 4648794
+    },
+    {
+      "State": "Kentucky",
+      "Population": 4467673
+    },
+    {
+      "State": "Oregon",
+      "Population": 4217737
+    },
+    {
+      "State": "Oklahoma",
+      "Population": 3956971
+    },
+    {
+      "State": "Connecticut",
+      "Population": 3565287
+    },
+    {
+      "State": "Utah",
+      "Population": 3205958
+    },
+    {
+      "State": "Puerto-Rico",
+      "Population": 3193694
+    },
+    {
+      "State": "Iowa",
+      "Population": 3155070
+    },
+    {
+      "State": "Nevada",
+      "Population": 3080156
+    },
+    {
+      "State": "Arkansas",
+      "Population": 3017825
+    },
+    {
+      "State": "Mississippi",
+      "Population": 2976149
+    },
+    {
+      "State": "Kansas",
+      "Population": 2913314
+    },
+    {
+      "State": "New-Mexico",
+      "Population": 2096829
+    },
+    {
+      "State": "Nebraska",
+      "Population": 1934408
+    },
+    {
+      "State": "West-Virginia",
+      "Population": 1787145
+    },
+    {
+      "State": "Idaho",
+      "Population": 1792065
+    },
+    {
+      "State": "Hawaii",
+      "Population": 1415872
+    },
+    {
+      "State": "New-Hampshire",
+      "Population": 1359711
+    },
+    {
+      "State": "Maine",
+      "Population": 1344212
+    },
+    {
+      "State": "Montana",
+      "Population": 1068778
+    },
+    {
+      "State": "Rhode-Island",
+      "Population": 1059361
+    },
+    {
+      "State": "Delaware",
+      "Population": 973764
+    },
+    {
+      "State": "South-Dakota",
+      "Population": 884659
+    },
+    {
+      "State": "North-Dakota",
+      "Population": 762062
+    },
+    {
+      "State": "Alaska",
+      "Population": 731545
+    },
+    {
+      "State": "District-of-Columbia",
+      "Population": 705749
+    },
+    {
+      "State": "Vermont",
+      "Population": 623989
+    },
+    {
+      "State": "Wyoming",
+      "Population": 578759
+    },
+    {
+      "State": "Guam",
+      "Population": 165718
+    },
+    {
+      "State": "American-Samoa",
+      "Population": 55641
+    },
+    {
+      "State": "Northern-Mariana-Islands",
+      "Population": 55194
+    }
+  ]

@@ -11,8 +11,6 @@ import {
     Resizable 
 } from "react-timeseries-charts";
 
-import data1 from './download1.json';
-
 
 class TimeSeriesChart extends React.Component {
     constructor(props) {
@@ -49,7 +47,6 @@ class TimeSeriesChart extends React.Component {
                 //alert(JSON.stringify(this.state.timeSeries[obj]));
                 if (this.state.timeSeries[obj]["Province/State"].toLowerCase() === state.toLowerCase())
                 {
-                    
                     return this.state.timeSeries[obj].TimeSeries;     
                 }
         }    
