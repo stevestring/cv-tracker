@@ -74,7 +74,7 @@ class TimeSeriesTable extends React.Component {
                 change = current - last;
                 pctChange = Math.round(change/last*100); 
                 
-                pctPopulation = Math.round(current/population*100*10000)/10000;
+                // pctPopulation = Math.round(current/population*100*10000)/10000;
 
                 ar.push([key,current,change,pctChange,pctPopulation]);  
                 last = current;     
@@ -100,14 +100,14 @@ class TimeSeriesTable extends React.Component {
           <Row>
           {/* <Col xs={1}></Col> */}
           <Col xs={12}>
-        <Table striped bordered hover responsive>
+        <Table striped bordered size="s">
             <thead>
                 <tr>
                     <th>Date</th>
                     <th>Confirmed Cases</th>
-                    <th>% of Population ({this.getPopulationForState(this.props.region).toLocaleString('en')})</th>
-                    <th>New Cases</th>
-                    <th>% Change Total Cases</th>
+                    {/* <th>% of Population ({this.getPopulationForState(this.props.region).toLocaleString('en')})</th> */}
+                    <th>New Cases (daily)</th>
+                    <th>% Change Total Cases (daily)</th>
                 </tr>
             </thead>
             <tbody>
@@ -116,7 +116,7 @@ class TimeSeriesTable extends React.Component {
                                 <tr key={i}>
                                     <td>{data[0]}</td>
                                     <td>{data[1]}</td>
-                                    <td>{data[4]}</td>
+                                    {/* <td>{data[4]}</td> */}
                                     <td>{data[2]}</td>
                                     <td>{data[3]}</td>
                                     
