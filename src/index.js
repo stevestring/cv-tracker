@@ -5,9 +5,9 @@ import './index.css'
 //import App from './App'
 import State from './State'
 //import County from './County'
-
+import history from "./history";
 const routing = (
-  <Router>
+  <Router history={history}>
         <div>
             <Route exact path="/" render={(props) => <State region={"Alabama"}/>} />
             <Route path="/index.html" render={(props) => <State region={"Alabama"}/>} />   

@@ -11,6 +11,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Dropdown from 'react-bootstrap/DropDown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import history from "./history";
 
 class State extends React.Component {
     constructor(props) {
@@ -40,6 +41,7 @@ class State extends React.Component {
 
     handleSelect = (evtKey, evt) => {
         // Get the selectedIndex in the evtKey variable
+        history.push('/region/'+evtKey.toLowerCase());
         this.setState( {region: evtKey});
     }
     transFormJSON(region){      
