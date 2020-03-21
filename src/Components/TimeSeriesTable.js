@@ -49,7 +49,8 @@ class TimeSeriesTable extends React.Component {
                   {                      
                       return StateData[obj].Population;     
                   }
-        }    
+        }   
+        return 0; 
       }; 
 
     transFormJSON(region){      
@@ -72,7 +73,9 @@ class TimeSeriesTable extends React.Component {
                 current = jsonTs[key]
                 change = current - last;
                 pctChange = Math.round(change/last*100); 
+                
                 pctPopulation = Math.round(current/population*100*10000)/10000;
+
                 ar.push([key,current,change,pctChange,pctPopulation]);  
                 last = current;     
             }    
@@ -95,16 +98,16 @@ class TimeSeriesTable extends React.Component {
  
       return (
           <Row>
-          <Col xs={1}></Col>
-          <Col xs={10}>
+          {/* <Col xs={1}></Col> */}
+          <Col xs={12}>
         <Table striped bordered hover>
             <thead>
                 <tr>
                     <th>Date</th>
                     <th>Confirmed Cases</th>
                     <th>% of Population ({this.getPopulationForState(this.props.region).toLocaleString('en')})</th>
-                    <th>Change</th>
-                    <th>% Change</th>
+                    <th>New Cases</th>
+                    <th>% Change Total Cases</th>
                 </tr>
             </thead>
             <tbody>

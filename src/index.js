@@ -9,10 +9,10 @@ import State from './State'
 const routing = (
   <Router>
         <div>
-            <Route exact path="/" render={(props) => <State region={"Maryland"}/>} />
-            <Route path="/index.html" render={(props) => <State region={"Maryland"}/>} />   
+            <Route exact path="/" render={(props) => <State region={"Alabama"}/>} />
+            <Route path="/index.html" render={(props) => <State region={"Alabama"}/>} />   
             <Route path="/state/:region" render={(props) => <State region={props.match.params.region}/>} />
-            {/* <Route path="/county/:region" render={(props) => <County region={props.match.params.region}/>} /> */}
+            <Route path="/region/:region" render={(props) => <State region={props.match.params.region}/>} />
         </div>
   </Router>
 )

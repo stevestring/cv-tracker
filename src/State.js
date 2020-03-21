@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { BrowserRouter as Router } from 'react-router-dom'
+
 import Container from 'react-bootstrap/Container';
 import TimeSeriesChart from './Components/TimeSeriesChart';
 import TimeSeriesTable from './Components/TimeSeriesTable';
@@ -38,7 +40,6 @@ class State extends React.Component {
 
     handleSelect = (evtKey, evt) => {
         // Get the selectedIndex in the evtKey variable
-        //this.props.history.push('');
         this.setState( {region: evtKey});
     }
     transFormJSON(region){      

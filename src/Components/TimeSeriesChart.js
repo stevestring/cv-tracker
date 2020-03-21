@@ -85,7 +85,7 @@ class TimeSeriesChart extends React.Component {
       //alert (timeSeries.min("cases") +":"+ timeSeries.max("cases"));
       return (
         <Resizable>            
-  <ChartContainer timeRange={timeSeries.range()} format="%m/%d">
+  <ChartContainer timeRange={timeSeries.range()} format="%m/%d" timeAxisTickCount={5}>
                                 <ChartRow height="300">
                                     <YAxis
                                         id="cases"
