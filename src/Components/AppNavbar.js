@@ -16,17 +16,17 @@ class AppNavbar extends React.Component {
     
         return (
 
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="dark" variant="dark" expand="lg">
         <Navbar.Brand href="./index.html">US Coronavirus Tracker</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+         {/*<Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
              </Nav>
-            {/* <Form inline>
+            <Form inline>
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
             <Button variant="outline-success">Search</Button>
-            </Form> */}
-        </Navbar.Collapse>
+            </Form> 
+        </Navbar.Collapse>*/}
         </Navbar>
     )
     }
