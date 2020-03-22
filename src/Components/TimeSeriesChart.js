@@ -1,6 +1,6 @@
 import React from 'react';
 import { TimeSeries, Index } from "pondjs";
-
+import { format } from "d3-format";
 import {
     Charts,
     ChartContainer,
@@ -8,7 +8,10 @@ import {
     YAxis,
     LineChart,
     styler,
-    Resizable 
+    Resizable,
+    EventMarker,
+    NullMarker,
+    ScatterChart
 } from "react-timeseries-charts";
 
 
@@ -17,7 +20,8 @@ class TimeSeriesChart extends React.Component {
         super(props);    
         this.state = {
           loaded: false,
-          timeSeries:null
+          timeSeries:null,
+          highlight: null
           //timeSeries: [{"Province/State": "Maryland","TimeSeries": {"3/22/20": "0", "3/23/20": "0"} },{"Province/State": "New South Wales","TimeSeries": {"3/22/20": "0", "3/23/20": "0"}}]
 
         };
@@ -70,6 +74,35 @@ class TimeSeriesChart extends React.Component {
         return ar 
     };  
 
+    // renderMarker = () => {
+        
+    //     if (!this.state.tracker) {
+    //         alert ("null marker");
+    //         return <NullMarker />;
+            
+    //     }
+    //     return (
+    //         <EventMarker
+    //             type="point"
+    //             axis="axis"
+    //             event={this.state.trackerEvent}
+    //             column="cases"
+    //             markerLabel={this.state.trackerValue}
+    //             markerLabelAlign="left"
+    //             markerLabelStyle={{ fill: "#2db3d1", stroke: "white" }}
+    //             markerRadius={3}
+    //             markerStyle={{ fill: "#2db3d1" }}
+    //         />
+    //     );
+
+    // };
+    handleMouseNear = point => {
+        //alert ("mouse near");
+        this.setState({
+            highlight: point
+        });
+    };
+
     render() {
 
         if(!this.state.loaded)
@@ -81,8 +114,16 @@ class TimeSeriesChart extends React.Component {
 
 
       const timeSeries = this.createTimeseries(this.props.region);
-      const style = styler([{ key: "cases", color: "red",width: 4, selected: "#2CB1CF" }]);
+      const style = styler([{ key: "cases", color: "red",
+      width: 4, selected: "#2CB1CF"}]);
       //alert (timeSeries.min("cases") +":"+ timeSeries.max("cases"));
+      const highlight = this.state.highlight;
+      const formatter = format(".0f");      
+      let infoValues = [];
+      if (highlight) {
+        const speedText = `${formatter(highlight.event.get(highlight.column))}`;
+        infoValues = [{ label: "Cases", value: speedText }];
+      }
       return (
         <Resizable>            
   <ChartContainer timeRange={timeSeries.range()} format="%m/%d" timeAxisTickCount={5}>
@@ -103,6 +144,30 @@ class TimeSeriesChart extends React.Component {
                                             series={timeSeries}
                                             minBarHeight={1}
                                         />
+                                        <ScatterChart
+                                            radius = {4.0}
+                                            axis="cases"
+                                            style={style}
+                                            spacing={1}
+                                            columns={["cases"]}
+                                            series={timeSeries}  
+                                            info={infoValues}
+                                            infoHeight={28}
+                                            infoWidth={110}
+                                            infoOffsetY={10}
+                                            infoTimeFormat="%m/%d"
+                                            infoStyle={{ box: {
+                                                fill: "black",
+                                                color: "#DDD"
+                                            }}}                                     selected={this.state.selection}
+                                            //onSelectionChange={p => this.handleSelectionChanged(p)}
+                                            onMouseNear={p => this.handleMouseNear(p)}
+                                            highlight={this.state.highlight}
+                                            radius={(event, column) =>
+                                                column === "cases" ? 4 : 4
+                                            }                                  
+                                        />
+                                        {/* {this.renderMarker()} */}
                                     </Charts>
                                     <YAxis
                                         id="cases"
