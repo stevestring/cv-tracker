@@ -12,6 +12,7 @@ import Row from 'react-bootstrap/Row';
 import Dropdown from 'react-bootstrap/DropDown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import history from "./history";
+import StateData from './StateData.json';
 
 class State extends React.Component {
     constructor(props) {
@@ -19,6 +20,8 @@ class State extends React.Component {
         this.state = {
           loaded: false,
           region: "Maryland",
+          current:0,
+          pctPopulation:0,
           timeSeries: null
         };
     }
@@ -30,18 +33,20 @@ class State extends React.Component {
           return response.json();
         })
         .then((data) => {
-          var filtered = data.filter(a=>a["Country/Region"] === "US"
-            && a["Province/State"].search(",") === -1 );
+        //   var filtered = data.filter(a=>a["Country/Region"] === "US"
+        //     && a["Province/State"].search(",") === -1 );
           
-          this.setState( {timeSeries: filtered});
+          this.setState( {timeSeries: data});
           this.setState( {loaded: true});
           //alert(this.state.timeSeries);
+
+
         });
     }
 
     handleSelect = (evtKey, evt) => {
         // Get the selectedIndex in the evtKey variable
-        history.push('/region/'+evtKey.toLowerCase());
+        history.push('/region/'+evtKey);//.toLowerCase());
         this.setState( {region: evtKey});
     }
     transFormJSON(region){      
@@ -61,7 +66,22 @@ class State extends React.Component {
         console.log (ar);
         return ar 
     };  
-    //TODO: Deal with this in Data service
+
+    getTimeSeriesforState(state){   
+        //alert(this.state.timeSeries);
+          state = state.replace(/-/g, " ");
+          for (var obj in this.state.timeSeries) {                
+                  //console.log(key + " -> " + data1[0].TimeSeries[key]);
+                  //alert(JSON.stringify(this.state.timeSeries[obj]));
+                  if (this.state.timeSeries[obj]["Province/State"].toLowerCase() === state.toLowerCase())
+                  {
+                      
+                      return this.state.timeSeries[obj].TimeSeries;     
+                  }
+          }    
+      };
+
+
     getStates(){   
         //alert(this.state.timeSeries);
         var ar = new Array(); 
@@ -83,6 +103,19 @@ class State extends React.Component {
           return ar.sort();
     }; 
 
+    getPopulationForState(state){   
+        state = state.replace(/ /g, "-");
+        for (var obj in StateData) {                
+                  //console.log(key + " -> " + data1[0].TimeSeries[key]);
+                  //alert(JSON.stringify(this.state.timeSeries[obj]));
+                  if (StateData[obj]["State"].toLowerCase() === state.toLowerCase())
+                  {                      
+                      return StateData[obj].Population;     
+                  }
+        }   
+        return 0; 
+      }; 
+
     render() {  
         if(!this.state.loaded)
         {
@@ -91,19 +124,46 @@ class State extends React.Component {
         else
         {
             var statesArray = this.getStates();
+            var population = this.getPopulationForState(this.state.region);
+            var regionTimeSeries = this.getTimeSeriesforState(this.state.region);           
+            var lastDate;
+            var priorDate;
+            for(var key in regionTimeSeries)
+            {   
+                priorDate = lastDate;
+                lastDate = key;
+            }
+
+
+            var currentCases = regionTimeSeries[lastDate]; 
+            var newCases = currentCases - regionTimeSeries[priorDate];  
+            var newCasesPercentIncrease = Math.round(newCases/regionTimeSeries[priorDate]*100);
+            var pctPopulation = Math.round(currentCases/population*100*10000)/10000
+            
             let statesDropDownItems = statesArray.map((item) =>
                 <Dropdown.Item eventKey={item[0]}>{item[1]}</Dropdown.Item>
                 );
             return (
                 <Container className="p-3">    
                 <AppNavbar/>                
-                <br/>
-                
-                    {/* <h1 className="header">{this.props.region}</h1> */}
-                        <DropdownButton className="pull-right" id="dropdown-basic-button" 
-                            title={this.state.region} onSelect={this.handleSelect}>
-                            {statesDropDownItems}
+                    <br/>
+                <Row>
+                    <Col xs={6}>
+                    <h1 className="header">{this.state.region}</h1>
+                    <h6>{currentCases} total cases ({pctPopulation}% of pop.)</h6>                    
+                    <h6>{newCases} new cases ({newCasesPercentIncrease}% increase)</h6>
+
+                    </Col>
+                    <Col xs={6}>
+                        <DropdownButton style={{float: 'right'}} className="justify-content-end" id="dropdown-basic-button" 
+                                title={this.state.region} onSelect={this.handleSelect}>
+                                <Dropdown.Item eventKey={'United States'}>United States</Dropdown.Item>
+                                <Dropdown.Divider />
+                                {statesDropDownItems}
                         </DropdownButton>
+                    </Col> 
+                    </Row>
+                    <br/>
                     <br/>
                     <TimeSeriesChart region={this.state.region} 
                         timeSeries={this.state.timeSeries} />   
