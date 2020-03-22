@@ -118,7 +118,7 @@ class TimeSeriesChart extends React.Component {
       width: 4, selected: "#2CB1CF"}]);
       //alert (timeSeries.min("cases") +":"+ timeSeries.max("cases"));
       const highlight = this.state.highlight;
-      const formatter = format(".0f");      
+      const formatter = format(",");      
       let infoValues = [];
       if (highlight) {
         const speedText = `${formatter(highlight.event.get(highlight.column))}`;
@@ -155,7 +155,7 @@ class TimeSeriesChart extends React.Component {
                                             infoHeight={28}
                                             infoWidth={110}
                                             infoOffsetY={10}
-                                            infoTimeFormat="%m/%d"
+                                            infoTimeFormat="%m/%d/%Y"
                                             infoStyle={{ box: {
                                                 fill: "black",
                                                 color: "#DDD"
