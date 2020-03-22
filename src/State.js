@@ -10,9 +10,12 @@ import AppNavbar from './Components/AppNavbar';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Dropdown from 'react-bootstrap/DropDown';
+import Spinner from 'react-bootstrap/Row';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import history from "./history";
 import StateData from './StateData.json';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
 
 class State extends React.Component {
     constructor(props) {
@@ -119,7 +122,11 @@ class State extends React.Component {
     render() {  
         if(!this.state.loaded)
         {
-            return null;
+            return (
+            <Spinner animation="border" role="status">
+            <span className="sr-only">Loading...</span>
+            </Spinner>
+            );
         }
         else
         {
@@ -145,25 +152,28 @@ class State extends React.Component {
                 );
             return (
                 <Container className="p-3">    
-                <AppNavbar/>                
-                    <br/>
-                <Row>
-                    <Col xs={6}>
+                {/* <AppNavbar/>    */}
+                <Navbar bg="dark" variant="dark" expand="lg">
+        <Navbar.Brand href="./index.html">US Coronavirus Tracker</Navbar.Brand>
+         <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse className="justify-content-end">
+                <Nav className="justify-content-end">
+                <Nav.Item>
+                <DropdownButton id="dropdown-basic-button" 
+                                    title={this.state.region} onSelect={this.handleSelect}>
+                                    <Dropdown.Item eventKey={'United States'}>United States</Dropdown.Item>
+                                    <Dropdown.Divider />
+                                    {statesDropDownItems}
+                            </DropdownButton>
+                </Nav.Item>
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>
+                    
                     <h1 className="header">{this.state.region}</h1>
-                    <h6>{currentCases} total cases ({pctPopulation}% of pop.)</h6>                    
-                    <h6>{newCases} new cases ({newCasesPercentIncrease}% increase)</h6>
-
-                    </Col>
-                    <Col xs={6}>
-                        <DropdownButton style={{float: 'right'}} className="justify-content-end" id="dropdown-basic-button" 
-                                title={this.state.region} onSelect={this.handleSelect}>
-                                <Dropdown.Item eventKey={'United States'}>United States</Dropdown.Item>
-                                <Dropdown.Divider />
-                                {statesDropDownItems}
-                        </DropdownButton>
-                    </Col> 
-                    </Row>
-                    <br/>
+                    <h6>{currentCases.toLocaleString('en') } total cases ({pctPopulation}% of population)</h6>                    
+                    <h6>{newCases.toLocaleString('en') } new cases ({newCasesPercentIncrease}% increase)</h6>
+                    
                     <br/>
                     <TimeSeriesChart region={this.state.region} 
                         timeSeries={this.state.timeSeries} />   

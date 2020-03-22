@@ -92,6 +92,7 @@ class TimeSeriesChart extends React.Component {
                                         min={0}
                                         max={timeSeries.max("cases")}
                                         type="linear"
+                                        width = {0}
                                     />
                                     <Charts>
                                         <LineChart
@@ -108,6 +109,7 @@ class TimeSeriesChart extends React.Component {
                                         min={0}
                                         max={timeSeries.max("cases")}
                                         type="linear"
+                                        width = {0}
                                     />
                                 </ChartRow>
                             </ChartContainer> 
