@@ -11,8 +11,6 @@ import {
     Resizable 
 } from "react-timeseries-charts";
 
-import data1 from './download1.json';
-
 
 class TimeSeriesChart extends React.Component {
     constructor(props) {
@@ -28,16 +26,9 @@ class TimeSeriesChart extends React.Component {
 
     componentDidMount()
     {
-        //alert(this.state.timeSeries);
-        fetch('https://3no0uoyhyh.execute-api.us-east-1.amazonaws.com/PROD/')
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          this.setState( {timeSeries: data});
+          this.setState( {timeSeries: this.props.timeSeries});
           this.setState( {loaded: true});
           //alert(this.state.timeSeries);
-        });
     }
 
     createTimeseries(region)
@@ -56,7 +47,6 @@ class TimeSeriesChart extends React.Component {
                 //alert(JSON.stringify(this.state.timeSeries[obj]));
                 if (this.state.timeSeries[obj]["Province/State"].toLowerCase() === state.toLowerCase())
                 {
-                    
                     return this.state.timeSeries[obj].TimeSeries;     
                 }
         }    
@@ -95,7 +85,7 @@ class TimeSeriesChart extends React.Component {
       //alert (timeSeries.min("cases") +":"+ timeSeries.max("cases"));
       return (
         <Resizable>            
-  <ChartContainer timeRange={timeSeries.range()}>
+  <ChartContainer timeRange={timeSeries.range()} format="%m/%d" timeAxisTickCount={5}>
                                 <ChartRow height="300">
                                     <YAxis
                                         id="cases"
