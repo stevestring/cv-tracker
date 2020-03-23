@@ -1,15 +1,9 @@
 import React from 'react';
 
-import { BrowserRouter as Router } from 'react-router-dom'
-
 import Container from 'react-bootstrap/Container';
 import TimeSeriesChart from './Components/TimeSeriesChart';
 import TimeSeriesTable from './Components/TimeSeriesTable';
 import RegionHeader from './Components/RegionHeader';
-
-import AppNavbar from './Components/AppNavbar';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 import Dropdown from 'react-bootstrap/DropDown';
 import Spinner from 'react-bootstrap/Row';
 import DropdownButton from 'react-bootstrap/DropdownButton';
@@ -53,23 +47,7 @@ class State extends React.Component {
         history.push('/region/'+evtKey);//.toLowerCase());
         this.setState( {region: evtKey});
     }
-    transFormJSON(region){      
-        var ar = new Array();            
-        region = region.replace(/-/g, " ");
-        //region = region.replace(" MD",", MD");
-        //alert(region);
-        var jsonTs =  this.getTimeSeriesforState(region)
-        for (var key in jsonTs) {               
-                //console.log(key + " -> " + data1[0].TimeSeries[key]);
-            if (Date.parse(key)>Date.parse('3/08/2020'))
-            {
-                ar.push([key,jsonTs[key]]);  
-            }    
-        }
-        //alert(JSON.stringify(ar));
-        console.log (ar);
-        return ar 
-    };  
+
 
     getTimeSeriesforState(state){   
         //alert(this.state.timeSeries);
@@ -92,18 +70,12 @@ class State extends React.Component {
         var region; 
         var regionKey;
           for (var key in this.state.timeSeries) {                
-                  //console.log(key + " -> " + data1[0].TimeSeries[key]);
-                //   if (
-                //     this.state.timeSeries[key]["Country/Region"] === "US" 
-                //     && this.state.timeSeries[key]["Province/State"].search(",") === -1
-                //     )
-                //   {
+
                     region = this.state.timeSeries[key]["Province/State"];
                     regionKey = region.replace(/-/g, " "); 
                     ar.push([regionKey,region]);                                       
-                //  }
           }   
-          //ar.push([regionKey,region]);  Add US Here
+
           return ar.sort();
     }; 
 
@@ -154,7 +126,7 @@ class State extends React.Component {
                 <Container className="p-3">    
                 {/* <AppNavbar/>    */}
                 <Navbar bg="dark" variant="dark" expand="lg">
-                <Navbar.Brand href="./index.html">US Coronavirus Tracker</Navbar.Brand>
+                <Navbar.Brand href="/">US Coronavirus Tracker</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse className="justify-content-end">
                         <Nav className="justify-content-end">
@@ -169,7 +141,7 @@ class State extends React.Component {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-                    <RegionHeader currentCases = {currentCases} priorCases={priorCases} population = {population}/>
+                    <RegionHeader currentCases = {currentCases} priorCases={priorCases} population = {population} region = {this.state.region}/>
                     {/* <h1 className="header">{this.state.region}</h1>
                     <h6>{currentCasesString } total cases ({pctPopulation}% of population)</h6>                    
                     <h6>{newCasesString } new cases ({newCasesPercentIncrease}% increase)</h6> */}

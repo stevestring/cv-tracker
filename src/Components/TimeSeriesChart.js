@@ -9,8 +9,6 @@ import {
     LineChart,
     styler,
     Resizable,
-    EventMarker,
-    NullMarker,
     ScatterChart
 } from "react-timeseries-charts";
 
@@ -159,15 +157,13 @@ class TimeSeriesChart extends React.Component {
                                             infoStyle={{ box: {
                                                 fill: "black",
                                                 color: "#DDD"
-                                            }}}                                     selected={this.state.selection}
-                                            //onSelectionChange={p => this.handleSelectionChanged(p)}
+                                            }}}                                    
+                                            selected={this.state.selection}
                                             onMouseNear={p => this.handleMouseNear(p)}
                                             highlight={this.state.highlight}
-                                            radius={(event, column) =>
-                                                column === "cases" ? 4 : 4
-                                            }                                  
+                           
                                         />
-                                        {/* {this.renderMarker()} */}
+
                                     </Charts>
                                     <YAxis
                                         id="cases"

@@ -1,7 +1,6 @@
 import React from 'react';
-import { TimeSeries, Index } from "pondjs";
-import Table from 'react-bootstrap/Table';
 
+import Table from 'react-bootstrap/Table';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
@@ -23,7 +22,6 @@ class TimeSeriesTable extends React.Component {
           this.setState( {loaded: true});
           //alert(this.state.timeSeries);
     }
-
 
 
     getTimeSeriesforState(state){   
