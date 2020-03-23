@@ -1,7 +1,7 @@
 import React from 'react';
 import { TimeSeries, Index } from "pondjs";
 import Table from 'react-bootstrap/Table';
-import StateData from './StateData.json';
+
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
@@ -40,18 +40,7 @@ class TimeSeriesTable extends React.Component {
         }    
     }; 
  
-    getPopulationForState(state){   
-        state = state.replace(/ /g, "-");
-        for (var obj in StateData) {                
-                  //console.log(key + " -> " + data1[0].TimeSeries[key]);
-                  //alert(JSON.stringify(this.state.timeSeries[obj]));
-                  if (StateData[obj]["State"].toLowerCase() === state.toLowerCase())
-                  {                      
-                      return StateData[obj].Population;     
-                  }
-        }   
-        return 0; 
-      }; 
+
 
     transFormJSON(region){      
         var ar = new Array();            
@@ -64,7 +53,7 @@ class TimeSeriesTable extends React.Component {
         var change=0;
         var pctChange=0;
         var pctPopulation =0;
-        var population = this.getPopulationForState(region);
+        //var population = this.getPopulationForState(region);
 
         //alert (pctPopulation);
         for (var key in jsonTs) {    
