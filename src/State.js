@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import Container from 'react-bootstrap/Container';
 import TimeSeriesChart from './Components/TimeSeriesChart';
 import TimeSeriesTable from './Components/TimeSeriesTable';
+import RegionHeader from './Components/RegionHeader';
 
 import AppNavbar from './Components/AppNavbar';
 import Col from 'react-bootstrap/Col';
@@ -143,10 +144,9 @@ class State extends React.Component {
 
 
             var currentCases = regionTimeSeries[lastDate]; 
-            var newCases = currentCases - regionTimeSeries[priorDate];  
-            var newCasesPercentIncrease = Math.round(newCases/regionTimeSeries[priorDate]*100);
-            var pctPopulation = Math.round(currentCases/population*100*10000)/10000
-            
+            var priorCases = regionTimeSeries[priorDate];  
+
+
             let statesDropDownItems = statesArray.map((item) =>
                 <Dropdown.Item eventKey={item[0]}>{item[1]}</Dropdown.Item>
                 );
@@ -154,25 +154,25 @@ class State extends React.Component {
                 <Container className="p-3">    
                 {/* <AppNavbar/>    */}
                 <Navbar bg="dark" variant="dark" expand="lg">
-        <Navbar.Brand href="./index.html">US Coronavirus Tracker</Navbar.Brand>
-         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse className="justify-content-end">
-                <Nav className="justify-content-end">
-                <Nav.Item>
-                <DropdownButton id="dropdown-basic-button" 
-                                    title={this.state.region} onSelect={this.handleSelect}>
-                                    <Dropdown.Item eventKey={'United States'}>United States</Dropdown.Item>
-                                    <Dropdown.Divider />
-                                    {statesDropDownItems}
-                            </DropdownButton>
-                </Nav.Item>
-                </Nav>
-            </Navbar.Collapse>
-        </Navbar>
-                    
-                    <h1 className="header">{this.state.region}</h1>
-                    <h6>{currentCases.toLocaleString('en') } total cases ({pctPopulation}% of population)</h6>                    
-                    <h6>{newCases.toLocaleString('en') } new cases ({newCasesPercentIncrease}% increase)</h6>
+                <Navbar.Brand href="./index.html">US Coronavirus Tracker</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse className="justify-content-end">
+                        <Nav className="justify-content-end">
+                        <Nav.Item>
+                        <DropdownButton id="dropdown-basic-button" 
+                                            title={this.state.region} onSelect={this.handleSelect}>
+                                            <Dropdown.Item eventKey={'United States'}>United States</Dropdown.Item>
+                                            <Dropdown.Divider />
+                                            {statesDropDownItems}
+                                    </DropdownButton>
+                        </Nav.Item>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Navbar>
+                    <RegionHeader currentCases = {currentCases} priorCases={priorCases} population = {population}/>
+                    {/* <h1 className="header">{this.state.region}</h1>
+                    <h6>{currentCasesString } total cases ({pctPopulation}% of population)</h6>                    
+                    <h6>{newCasesString } new cases ({newCasesPercentIncrease}% increase)</h6> */}
                     
                     <br/>
                     <TimeSeriesChart region={this.state.region} 
