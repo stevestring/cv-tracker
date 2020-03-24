@@ -57,7 +57,8 @@ class TimeSeriesTable extends React.Component {
 
         //alert (pctPopulation);
         for (var key in jsonTs) {    
-            if (Date.parse(key)>Date.parse('3/08/2020'))
+            if (Date.parse(key)>Date.parse('3/08/2020')
+            && Date.parse(key)<Date.parse('3/23/2020'))
             {   
                 current = jsonTs[key]
                 change = current - last;

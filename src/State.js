@@ -61,7 +61,8 @@ class State extends React.Component {
         var jsonTs =  this.getTimeSeriesforState(region)
         for (var key in jsonTs) {               
                 //console.log(key + " -> " + data1[0].TimeSeries[key]);
-            if (Date.parse(key)>Date.parse('3/08/2020'))
+            if (Date.parse(key)>Date.parse('3/08/2020')
+            && Date.parse(key)<Date.parse('3/23/2020'))
             {
                 ar.push([key,jsonTs[key]]);  
             }    
@@ -138,8 +139,11 @@ class State extends React.Component {
             var priorDate;
             for(var key in regionTimeSeries)
             {   
+                if (Date.parse(key)<Date.parse('3/23/2020'))
+                {
                 priorDate = lastDate;
                 lastDate = key;
+                }
             }
 
 
