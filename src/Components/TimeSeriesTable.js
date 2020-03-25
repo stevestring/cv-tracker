@@ -52,8 +52,8 @@ class TimeSeriesTable extends React.Component {
         var pctChange=0;
  
 
-        for (var i=0; i<jsonTs.length;i++) {               
 
+        for (var i=0; i<jsonTs.length;i++) {   
             if (Date.parse(jsonTs[i].date)>Date.parse('3/08/2020'))
             {  
                 //current = jsonTs[i].confirmed;

@@ -53,7 +53,6 @@ class State extends React.Component {
         this.setState( {regionTimeSeries:regionTs });
     }
 
-
     getTimeSeriesforState(state){   
           var key;
           state = state.replace(/ /g, "-");
@@ -117,11 +116,6 @@ class State extends React.Component {
             var regionTimeSeries = this.getTimeSeriesforState(this.state.region);           
             var lastDate;
             var priorDate;
-            // for(var key in regionTimeSeries)
-            // {   
-            //     priorDate = lastDate;
-            //     lastDate = key;
-            // }
 
             //alert (regionTimeSeries);
             lastDate = regionTimeSeries.length-1;
