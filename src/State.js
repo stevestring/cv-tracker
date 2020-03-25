@@ -20,13 +20,14 @@ class State extends React.Component {
           region: "Maryland",
           current:0,
           pctPopulation:0,
-          timeSeries: null
+          timeSeries: null,
+          regionTimeSeries:[{"confirmed":0,"fatal":0,"recovered":0,"date":"2020-03-21"},{"confirmed":0,"fatal":0,"recovered":0,"date":"2020-03-25"}]
         };
     }
 
     componentDidMount() {
         this.setState( {region: this.props.region});
-        fetch('https://3no0uoyhyh.execute-api.us-east-1.amazonaws.com/PROD/')
+        fetch('https://sxovlvdb76.execute-api.us-east-1.amazonaws.com/PROD/cv-data-lambda-2')
         .then((response) => {
           return response.json();
         })
@@ -44,23 +45,30 @@ class State extends React.Component {
 
     handleSelect = (evtKey, evt) => {
         // Get the selectedIndex in the evtKey variable
-        history.push('/region/'+evtKey);//.toLowerCase());
+        var regionTs = this.getTimeSeriesforState(evtKey);
+        //alert (regionTs);
+
+        history.push('/region/'+evtKey);//.toLowerCase()
         this.setState( {region: evtKey});
+        this.setState( {regionTimeSeries:regionTs });
     }
 
 
     getTimeSeriesforState(state){   
-        //alert(this.state.timeSeries);
-          state = state.replace(/-/g, " ");
-          for (var obj in this.state.timeSeries) {                
-                  //console.log(key + " -> " + data1[0].TimeSeries[key]);
-                  //alert(JSON.stringify(this.state.timeSeries[obj]));
-                  if (this.state.timeSeries[obj]["Province/State"].toLowerCase() === state.toLowerCase())
-                  {
-                      
-                      return this.state.timeSeries[obj].TimeSeries;     
-                  }
-          }    
+          var key;
+          state = state.replace(/ /g, "-");
+          state = state.toLowerCase();
+          if (state === "unitedstates")
+          {
+            key = "unitedstates";
+          }
+          else
+          {
+            key =  state+"_unitedstates";
+          }
+          //alert(key);
+         
+          return this.state.timeSeries[key];     
       };
 
 
@@ -71,8 +79,9 @@ class State extends React.Component {
         var regionKey;
           for (var key in this.state.timeSeries) {                
 
-                    region = this.state.timeSeries[key]["Province/State"];
-                    regionKey = region.replace(/-/g, " "); 
+                    // alert(key);
+                    region = key.replace(/_unitedstates/g, ""); ;
+                    regionKey = region.replace(/-/g, " ");                     
                     ar.push([regionKey,region]);                                       
           }   
 
@@ -108,15 +117,17 @@ class State extends React.Component {
             var regionTimeSeries = this.getTimeSeriesforState(this.state.region);           
             var lastDate;
             var priorDate;
-            for(var key in regionTimeSeries)
-            {   
-                priorDate = lastDate;
-                lastDate = key;
-            }
+            // for(var key in regionTimeSeries)
+            // {   
+            //     priorDate = lastDate;
+            //     lastDate = key;
+            // }
 
+            //alert (regionTimeSeries);
+            lastDate = regionTimeSeries.length-1;
 
-            var currentCases = regionTimeSeries[lastDate]; 
-            var priorCases = regionTimeSeries[priorDate];  
+            var currentCases = regionTimeSeries[lastDate].confirmed; 
+            var priorCases = regionTimeSeries[lastDate-1].confirmed;  
 
 
             let statesDropDownItems = statesArray.map((item) =>
@@ -133,7 +144,7 @@ class State extends React.Component {
                         <Nav.Item>
                         <DropdownButton id="dropdown-basic-button" 
                                             title={this.state.region} onSelect={this.handleSelect}>
-                                            <Dropdown.Item eventKey={'United States'}>United States</Dropdown.Item>
+                                            <Dropdown.Item eventKey={'unitedstates'}>unitedstates</Dropdown.Item>
                                             <Dropdown.Divider />
                                             {statesDropDownItems}
                                     </DropdownButton>
