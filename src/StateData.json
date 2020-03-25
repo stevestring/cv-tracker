@@ -12,7 +12,7 @@
       "Population": 21477737
     },
     {
-      "State": "New-York",
+      "State": "NewYork",
       "Population": 19453561
     },
     {
@@ -32,7 +32,7 @@
       "Population": 10617423
     },
     {
-      "State": "North-Carolina",
+      "State": "NorthCarolina",
       "Population": 10488084
     },
     {
@@ -40,7 +40,7 @@
       "Population": 9986857
     },
     {
-      "State": "New-Jersey",
+      "State": "NewJersey",
       "Population": 8882190
     },
     {
@@ -88,7 +88,7 @@
       "Population": 5639632
     },
     {
-      "State": "South-Carolina",
+      "State": "SouthCarolina",
       "Population": 5148714
     },
     {
@@ -120,7 +120,7 @@
       "Population": 3205958
     },
     {
-      "State": "Puerto-Rico",
+      "State": "PuertoRico",
       "Population": 3193694
     },
     {
@@ -144,7 +144,7 @@
       "Population": 2913314
     },
     {
-      "State": "New-Mexico",
+      "State": "NewMexico",
       "Population": 2096829
     },
     {
@@ -152,7 +152,7 @@
       "Population": 1934408
     },
     {
-      "State": "West-Virginia",
+      "State": "WestVirginia",
       "Population": 1787145
     },
     {
@@ -164,7 +164,7 @@
       "Population": 1415872
     },
     {
-      "State": "New-Hampshire",
+      "State": "NewHampshire",
       "Population": 1359711
     },
     {
@@ -176,7 +176,7 @@
       "Population": 1068778
     },
     {
-      "State": "Rhode-Island",
+      "State": "RhodeIsland",
       "Population": 1059361
     },
     {
@@ -184,11 +184,11 @@
       "Population": 973764
     },
     {
-      "State": "South-Dakota",
+      "State": "SouthDakota",
       "Population": 884659
     },
     {
-      "State": "North-Dakota",
+      "State": "NorthDakota",
       "Population": 762062
     },
     {
@@ -196,7 +196,7 @@
       "Population": 731545
     },
     {
-      "State": "District-of-Columbia",
+      "State": "DistrictofColumbia",
       "Population": 705749
     },
     {
@@ -212,15 +212,15 @@
       "Population": 165718
     },
     {
-      "State": "American-Samoa",
+      "State": "AmericanSamoa",
       "Population": 55641
     },
     {
-      "State": "Northern-Mariana-Islands",
+      "State": "NorthernMarianaIslands",
       "Population": 55194
     },
     {
-      "State": "United-States",
+      "State": "UnitedStates",
       "Population": 327200000
     }
   ]

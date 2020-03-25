@@ -9,9 +9,9 @@ import history from "./history";
 const routing = (
   <Router history={history}>
         <div>
-            <Route exact path="/" render={(props) => <State region={"United States"}/>} />
-            <Route path="/index.html" render={(props) => <State region={"United States"}/>} />   
-            <Route path="/state/:region" render={(props) => <State region={props.match.params.region}/>} />
+            <Route exact path="/" render={(props) => <State region={"unitedstates"}/>} />
+            <Route path="/index.html" render={(props) => <State region={"unitedstates"}/>} />   
+            {/* <Route path="/state/:region" render={(props) => <State region={props.match.params.region}/>} /> */}
             <Route path="/region/:region" render={(props) => <State region={props.match.params.region}/>} />
         </div>
   </Router>

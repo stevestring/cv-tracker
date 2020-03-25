@@ -17,7 +17,7 @@ class AppNavbar extends React.Component {
         return (
 
         <Navbar bg="dark" variant="dark" expand="lg">
-        <Navbar.Brand href="./index.html">US Coronavirus Tracker</Navbar.Brand>
+        <Navbar.Brand href="/">US Coronavirus Tracker</Navbar.Brand>
          {/*<Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">

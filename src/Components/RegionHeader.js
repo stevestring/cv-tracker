@@ -1,13 +1,8 @@
-
-
 import React from 'react';
 
 
 class RegionHeader extends React.Component {
-    constructor(props) {
-        super(props);    
 
-    }
     render() {  
         //alert (this.props.priorCases);
         var newCases = this.props.currentCases-this.props.priorCases;
@@ -33,7 +28,7 @@ class RegionHeader extends React.Component {
             return (
                 <div>
                 <h1 className="header">{this.props.region}</h1>
-                <h6>{this.props.currentCases } total cases ({pctPopulation}% of population)</h6>                    
+                <h6>{currentCasesString} total cases ({pctPopulation}% of population)</h6>                    
                 <h6>{newCasesString} new cases ({newCasesPercentIncrease}% increase)</h6>
                 </div>
             );

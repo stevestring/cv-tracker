@@ -9,8 +9,6 @@ import {
     LineChart,
     styler,
     Resizable,
-    EventMarker,
-    NullMarker,
     ScatterChart
 } from "react-timeseries-charts";
 
@@ -30,6 +28,7 @@ class TimeSeriesChart extends React.Component {
 
     componentDidMount()
     {
+           
           this.setState( {timeSeries: this.props.timeSeries});
           this.setState( {loaded: true});
           //alert(this.state.timeSeries);
@@ -45,29 +44,34 @@ class TimeSeriesChart extends React.Component {
     }
 
     getTimeSeriesforState(state){   
-      //alert(this.state.timeSeries);
-        for (var obj in this.state.timeSeries) {                
-                //console.log(key + " -> " + data1[0].TimeSeries[key]);
-                //alert(JSON.stringify(this.state.timeSeries[obj]));
-                if (this.state.timeSeries[obj]["Province/State"].toLowerCase() === state.toLowerCase())
-                {
-                    return this.state.timeSeries[obj].TimeSeries;     
-                }
-        }    
-    }; 
+        var key;
+        state = state.replace(/ /g, "-");
+        state = state.toLowerCase();
+        if (state === "unitedstates")
+        {
+          key = "unitedstates";
+        }
+        else
+        {
+          key =  state+"_unitedstates";
+        }
+        //alert(key);
+       
+        return this.state.timeSeries[key];     
+    };
     
     transFormJSON(region){      
         var ar = new Array();            
         region = region.replace(/-/g, " ");
-        //region = region.replace(" MD",", MD");
-        //alert(region);
-        var jsonTs =  this.getTimeSeriesforState(region)
-        for (var key in jsonTs) {               
-                //console.log(key + " -> " + data1[0].TimeSeries[key]);
-            if (Date.parse(key)>Date.parse('3/08/2020')
-            && Date.parse(key)<Date.parse('3/23/2020'))
+
+        //alert(JSON.stringify(this.state.timeSeries));
+        var jsonTs =  this.getTimeSeriesforState(region);
+
+        for (var i=0; i<jsonTs.length;i++) {               
+
+            if (Date.parse(jsonTs[i].date)>Date.parse('3/08/2020'))
             {
-                ar.push([key,jsonTs[key]]);  
+                ar.push([jsonTs[i].date,jsonTs[i].confirmed]);  
             }    
         }
         //alert(JSON.stringify(ar));
@@ -75,28 +79,7 @@ class TimeSeriesChart extends React.Component {
         return ar 
     };  
 
-    // renderMarker = () => {
-        
-    //     if (!this.state.tracker) {
-    //         alert ("null marker");
-    //         return <NullMarker />;
-            
-    //     }
-    //     return (
-    //         <EventMarker
-    //             type="point"
-    //             axis="axis"
-    //             event={this.state.trackerEvent}
-    //             column="cases"
-    //             markerLabel={this.state.trackerValue}
-    //             markerLabelAlign="left"
-    //             markerLabelStyle={{ fill: "#2db3d1", stroke: "white" }}
-    //             markerRadius={3}
-    //             markerStyle={{ fill: "#2db3d1" }}
-    //         />
-    //     );
-
-    // };
+ 
     handleMouseNear = point => {
         //alert ("mouse near");
         this.setState({
@@ -160,15 +143,13 @@ class TimeSeriesChart extends React.Component {
                                             infoStyle={{ box: {
                                                 fill: "black",
                                                 color: "#DDD"
-                                            }}}                                     selected={this.state.selection}
-                                            //onSelectionChange={p => this.handleSelectionChanged(p)}
+                                            }}}                                    
+                                            selected={this.state.selection}
                                             onMouseNear={p => this.handleMouseNear(p)}
                                             highlight={this.state.highlight}
-                                            radius={(event, column) =>
-                                                column === "cases" ? 4 : 4
-                                            }                                  
+                           
                                         />
-                                        {/* {this.renderMarker()} */}
+
                                     </Charts>
                                     <YAxis
                                         id="cases"
