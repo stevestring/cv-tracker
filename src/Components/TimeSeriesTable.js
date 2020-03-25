@@ -86,7 +86,7 @@ class TimeSeriesTable extends React.Component {
             <thead>
                 <tr>
                     <th>Date</th>
-                    <th>Confirmed Cases</th>
+                    <th>Cases</th>
                     {/* <th>% of Population ({this.getPopulationForState(this.props.region).toLocaleString('en')})</th> */}
                     <th>Deaths</th>
                     <th>Recoveries</th>
