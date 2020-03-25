@@ -27,7 +27,7 @@ class RegionHeader extends React.Component {
         else{
             return (
                 <div>
-                <h1 className="header">{this.props.region}</h1>
+                <h1 className="header">{this.props.regionDisplay}</h1>
                 <h6>{currentCasesString} total cases ({pctPopulation}% of population)</h6>                    
                 <h6>{newCasesString} new cases ({newCasesPercentIncrease}% increase)</h6>
                 </div>

@@ -13,6 +13,7 @@
     },
     {
       "State": "NewYork",
+      "DisplayName": "New York",
       "Population": 19453561
     },
     {
@@ -33,6 +34,7 @@
     },
     {
       "State": "NorthCarolina",
+      "DisplayName": "North Carolina",
       "Population": 10488084
     },
     {
@@ -41,6 +43,7 @@
     },
     {
       "State": "NewJersey",
+      "DisplayName": "New Jersey",
       "Population": 8882190
     },
     {
@@ -89,6 +92,7 @@
     },
     {
       "State": "SouthCarolina",
+      "DisplayName": "South Carolina",
       "Population": 5148714
     },
     {
@@ -121,6 +125,7 @@
     },
     {
       "State": "PuertoRico",
+      "DisplayName": "Puerto Rico",
       "Population": 3193694
     },
     {
@@ -145,6 +150,7 @@
     },
     {
       "State": "NewMexico",
+      "DisplayName": "New Mexico",
       "Population": 2096829
     },
     {
@@ -153,6 +159,7 @@
     },
     {
       "State": "WestVirginia",
+      "DisplayName": "West Virginia",
       "Population": 1787145
     },
     {
@@ -165,6 +172,7 @@
     },
     {
       "State": "NewHampshire",
+      "DisplayName": "New Hampshire",
       "Population": 1359711
     },
     {
@@ -177,6 +185,7 @@
     },
     {
       "State": "RhodeIsland",
+      "DisplayName": "Rhode Island",
       "Population": 1059361
     },
     {
@@ -185,10 +194,12 @@
     },
     {
       "State": "SouthDakota",
+      "DisplayName": "North Dakota",
       "Population": 884659
     },
     {
       "State": "NorthDakota",
+      "DisplayName": "South Dakota",
       "Population": 762062
     },
     {
@@ -197,6 +208,7 @@
     },
     {
       "State": "DistrictofColumbia",
+      "DisplayName": "District of Columbia",
       "Population": 705749
     },
     {
@@ -213,14 +225,17 @@
     },
     {
       "State": "AmericanSamoa",
+      "DisplayName": "American Samoa",
       "Population": 55641
     },
     {
       "State": "NorthernMarianaIslands",
+      "DisplayName": "Northern Mariana Islands",
       "Population": 55194
     },
     {
       "State": "UnitedStates",
+      "DisplayName": "United States",
       "Population": 327200000
     }
   ]

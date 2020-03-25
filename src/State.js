@@ -18,6 +18,7 @@ class State extends React.Component {
         this.state = {
           loaded: false,
           region: "Maryland",
+          regionDisplay: "Maryland",
           current:0,
           pctPopulation:0,
           timeSeries: null,
@@ -27,6 +28,7 @@ class State extends React.Component {
 
     componentDidMount() {
         this.setState( {region: this.props.region});
+        this.setState ({regionDisplay:this.getDisplayNameForState(this.props.region)})
         fetch('https://sxovlvdb76.execute-api.us-east-1.amazonaws.com/PROD/cv-data-lambda-2')
         .then((response) => {
           return response.json();
@@ -50,6 +52,7 @@ class State extends React.Component {
 
         history.push('/region/'+evtKey);//.toLowerCase()
         this.setState( {region: evtKey});
+        this.setState ({regionDisplay:this.getDisplayNameForState(evtKey)})
         this.setState( {regionTimeSeries:regionTs });
     }
 
@@ -79,8 +82,8 @@ class State extends React.Component {
           for (var key in this.state.timeSeries) {                
 
                     // alert(key);
-                    region = key.replace(/_unitedstates/g, ""); ;
-                    regionKey = region.replace(/-/g, " ");                     
+                    regionKey = key.replace(/_unitedstates/g, ""); 
+                    region = this.getDisplayNameForState(regionKey);
                     ar.push([regionKey,region]);                                       
           }   
 
@@ -98,7 +101,27 @@ class State extends React.Component {
                   }
         }   
         return 0; 
-      }; 
+    }; 
+
+    getDisplayNameForState(state){   
+        state = state.replace(/ /g, "-");
+        for (var obj in StateData) {                
+                  //console.log(key + " -> " + data1[0].TimeSeries[key]);
+                  //alert(JSON.stringify(this.state.timeSeries[obj]));
+                  if (StateData[obj]["State"].toLowerCase() === state.toLowerCase())
+                  {     
+                    if (StateData[obj].DisplayName != null)
+                    {
+                      return StateData[obj].DisplayName;     
+                    }
+                    else
+                    {
+                      return state[0].toUpperCase() + state.substr(1);
+                    }
+                  }
+        }   
+        return 0; 
+    };
 
     render() {  
         if(!this.state.loaded)
@@ -137,8 +160,8 @@ class State extends React.Component {
                         <Nav className="justify-content-end">
                         <Nav.Item>
                         <DropdownButton id="dropdown-basic-button" 
-                                            title={this.state.region} onSelect={this.handleSelect}>
-                                            <Dropdown.Item eventKey={'unitedstates'}>unitedstates</Dropdown.Item>
+                                            title={this.getDisplayNameForState(this.state.region)} onSelect={this.handleSelect}>
+                                            <Dropdown.Item eventKey={'unitedstates'}>United States</Dropdown.Item>
                                             <Dropdown.Divider />
                                             {statesDropDownItems}
                                     </DropdownButton>
@@ -146,7 +169,8 @@ class State extends React.Component {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-                    <RegionHeader currentCases = {currentCases} priorCases={priorCases} population = {population} region = {this.state.region}/>
+                    <RegionHeader currentCases = {currentCases} priorCases={priorCases} 
+                        population = {population} region = {this.state.region} regionDisplay = {this.state.regionDisplay}/>
                     {/* <h1 className="header">{this.state.region}</h1>
                     <h6>{currentCasesString } total cases ({pctPopulation}% of population)</h6>                    
                     <h6>{newCasesString } new cases ({newCasesPercentIncrease}% increase)</h6> */}
