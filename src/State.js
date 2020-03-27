@@ -84,9 +84,12 @@ class State extends React.Component {
                     // alert(key);
                     regionKey = key.replace(/_unitedstates/g, ""); 
                     region = this.getDisplayNameForState(regionKey);
-                    ar.push([regionKey,region]);                                       
-          }   
 
+                    if (regionKey.search("_") === -1)
+                    {
+                      ar.push([regionKey,region]);
+                    }
+          }   
           return ar.sort();
     }; 
 
