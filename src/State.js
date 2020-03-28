@@ -182,7 +182,9 @@ class State extends React.Component {
                     <TimeSeriesChart region={this.state.region} 
                         timeSeries={this.state.timeSeries} />   
                     <TimeSeriesTable region={this.state.region} 
-                        timeSeries={this.state.timeSeries} />              
+                        timeSeries={this.state.timeSeries} />   
+
+                        <div>Data sources: CDC, WHO, ECDC, Wikipedia, 24/7 Wall St.</div>           
                 </Container>
             );
 

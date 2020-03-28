@@ -111,7 +111,8 @@ class TimeSeriesChart extends React.Component {
       return (
         <Resizable>            
   <ChartContainer timeRange={timeSeries.range()} format="%m/%d" timeAxisTickCount={5}>
-                                <ChartRow height="300">
+                                <ChartRow height="300"
+                                >
                                     <YAxis
                                         id="cases"
                                         min={0}
@@ -140,10 +141,10 @@ class TimeSeriesChart extends React.Component {
                                             infoWidth={110}
                                             infoOffsetY={10}
                                             infoTimeFormat="%m/%d/%Y"
-                                            infoStyle={{ box: {
-                                                fill: "black",
-                                                color: "#DDD"
-                                            }}}                                    
+                                            // infoStyle={{ box: {
+                                            //     fill: "black",
+                                            //     color: "#DDD"
+                                            // }}}                                    
                                             selected={this.state.selection}
                                             onMouseNear={p => this.handleMouseNear(p)}
                                             highlight={this.state.highlight}
