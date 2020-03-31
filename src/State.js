@@ -29,17 +29,17 @@ class State extends React.Component {
     componentDidMount() {
         this.setState( {region: this.props.region});
         this.setState ({regionDisplay:this.getDisplayNameForState(this.props.region)})
-        fetch('https://sxovlvdb76.execute-api.us-east-1.amazonaws.com/PROD/cv-data-lambda-2')
+        fetch('https://4ogw2v7y15.execute-api.us-east-1.amazonaws.com/default/cv-data-lambda-nyt')
         .then((response) => {
           return response.json();
         })
         .then((data) => {
         //   var filtered = data.filter(a=>a["Country/Region"] === "US"
         //     && a["Province/State"].search(",") === -1 );
-          
+          alert(JSON.stringify(data));
           this.setState( {timeSeries: data});
           this.setState( {loaded: true});
-          //alert(this.state.timeSeries);
+          
 
 
         });
