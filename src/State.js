@@ -144,7 +144,7 @@ class State extends React.Component {
             var lastDate;
             var priorDate;
 
-            alert (JSON.stringify(regionTimeSeries));
+            //alert (JSON.stringify(regionTimeSeries));
             lastDate = regionTimeSeries.length-1;
 
             var currentCases = regionTimeSeries[lastDate].confirmed; 
