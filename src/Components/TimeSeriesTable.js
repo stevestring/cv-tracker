@@ -33,7 +33,7 @@ class TimeSeriesTable extends React.Component {
         }
         else
         {
-          key =  state+"_unitedstates";
+          key =  state;
         }
         //alert(key);
        

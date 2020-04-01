@@ -36,7 +36,7 @@ class State extends React.Component {
         .then((data) => {
         //   var filtered = data.filter(a=>a["Country/Region"] === "US"
         //     && a["Province/State"].search(",") === -1 );
-          alert(JSON.stringify(data));
+          //alert(JSON.stringify(data));
           this.setState( {timeSeries: data});
           this.setState( {loaded: true});
           
@@ -66,7 +66,7 @@ class State extends React.Component {
           }
           else
           {
-            key =  state+"_unitedstates";
+            key =  state;
           }
           //alert(key);
          
@@ -85,7 +85,7 @@ class State extends React.Component {
                     regionKey = key.replace(/_unitedstates/g, ""); 
                     region = this.getDisplayNameForState(regionKey);
 
-                    if (regionKey.search("_") === -1)
+                    if (regionKey.search("0") === -1)
                     {
                       ar.push([regionKey,region]);
                     }
@@ -111,6 +111,7 @@ class State extends React.Component {
         for (var obj in StateData) {                
                   //console.log(key + " -> " + data1[0].TimeSeries[key]);
                   //alert(JSON.stringify(this.state.timeSeries[obj]));
+                  //alert (state);
                   if (StateData[obj]["State"].toLowerCase() === state.toLowerCase())
                   {     
                     if (StateData[obj].DisplayName != null)
@@ -143,7 +144,7 @@ class State extends React.Component {
             var lastDate;
             var priorDate;
 
-            //alert (regionTimeSeries);
+            alert (JSON.stringify(regionTimeSeries));
             lastDate = regionTimeSeries.length-1;
 
             var currentCases = regionTimeSeries[lastDate].confirmed; 

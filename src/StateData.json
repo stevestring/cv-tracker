@@ -234,6 +234,11 @@
       "Population": 55194
     },
     {
+      "State": "VirginIslands",
+      "DisplayName": "Virgin Islands",
+      "Population": 107268
+    },
+    {
       "State": "UnitedStates",
       "DisplayName": "United States",
       "Population": 327200000
