@@ -185,7 +185,7 @@ class State extends React.Component {
                     <TimeSeriesTable region={this.state.region} 
                         timeSeries={this.state.timeSeries} />   
 
-                        <div>Data sources: CDC, WHO, ECDC, Wikipedia, 24/7 Wall St.</div>           
+                        <div>Data from <a href="https://www.nytimes.com/interactive/2020/us/coronavirus-us-cases.html">The New York Times</a>, based on reports from state and local health agencies.</div>           
                 </Container>
             );
 

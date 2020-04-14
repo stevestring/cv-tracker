@@ -56,10 +56,10 @@ class TimeSeriesTable extends React.Component {
         for (var i=0; i<jsonTs.length;i++) {   
             if (Date.parse(jsonTs[i].date)>Date.parse('3/08/2020'))
             {  
-                //current = jsonTs[i].confirmed;
-                //change = current - last;
-                //pctChange = Math.round(change/last*100); 
-                ar.push([jsonTs[i].date,jsonTs[i].confirmed,jsonTs[i].fatal,jsonTs[i].recovered,0]);  
+                current = jsonTs[i].confirmed;
+                change = current - last;
+                pctChange = Math.round(change/last*1000)/10; 
+                ar.push([jsonTs[i].date,jsonTs[i].confirmed,pctChange]);  
                 last = current; 
             }    
         }
@@ -88,8 +88,8 @@ class TimeSeriesTable extends React.Component {
                     <th>Date</th>
                     <th>Cases</th>
                     {/* <th>% of Population ({this.getPopulationForState(this.props.region).toLocaleString('en')})</th> */}
-                    <th>Deaths</th>
-                    <th>Recoveries</th>
+                    {/* <th>Deaths</th> */}
+                    <th>% Change</th>
                 </tr>
             </thead>
             <tbody>
@@ -99,8 +99,8 @@ class TimeSeriesTable extends React.Component {
                                     <td>{data[0]}</td>
                                     <td>{data[1]}</td>
                                     {/* <td>{data[4]}</td> */}
+                                    {/* <td>{data[2]}</td> */}
                                     <td>{data[2]}</td>
-                                    <td>{data[3]}</td>
                                     
                                 </tr>
                             )
